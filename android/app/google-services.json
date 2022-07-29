@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "357921509677",
+    "project_id": "tokytokapp",
+    "storage_bucket": "tokytokapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:357921509677:android:7d18c763f1e0b2f8f1c3a4",
+        "android_client_info": {
+          "package_name": "com.example.tiktok_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "357921509677-nd7fd2c1i3o7rg7b50vrpa488lvr113k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiTZXRYI-0r7fg8lVBCzEh-JXn6w5xzaM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "357921509677-nd7fd2c1i3o7rg7b50vrpa488lvr113k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
