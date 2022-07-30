@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:tiktok_clone/constants.dart';
+import 'package:tiktok_clone/model/user.dart' as model;
 
 class AuthController extends GetxController {
   void registerUser(
@@ -25,7 +26,12 @@ class AuthController extends GetxController {
         );
         String userDownloadUrl = await _uploadUserProfileImageToFirebase(image);
 
-
+        model.User user = model.User(
+          name: username,
+          userProfileImage: userDownloadUrl,
+          email: email,
+          uid: credential.user!.uid,
+        );
 
         //**///
       }
