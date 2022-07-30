@@ -3,10 +3,15 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tiktok_clone/constants.dart';
 import 'package:tiktok_clone/model/user.dart' as model;
 
 class AuthController extends GetxController {
+  static AuthController instance = Get.find();
+
+  late Rx<File?> pickedImages;
+
   void registerUser(
     String username,
     String email,
@@ -32,8 +37,17 @@ class AuthController extends GetxController {
           email: email,
           uid: credential.user!.uid,
         );
+        //collection('users') =>Gets a CollectionReference for the specified Firestore path.
+        //doc() =>Returns a DocumentReference with the provided path.
+        //set(user.toJson()=>Sets data on the document, overwriting any existing data. If the document does not yet exist, it will be create
+        await fireStore
+            .collection('users')
+            .doc(credential.user!.uid)
+            .set(user.toJson());
 
         //**///
+      } else {
+        Get.snackbar("Error Creating Account", "Please fill all the fields");
       }
     } catch (e) {
       Get.snackbar("Error Creating Account", e.toString());
@@ -55,5 +69,16 @@ class AuthController extends GetxController {
 
     String userDownloadUrl = await taskSnapshot.ref.getDownloadURL();
     return userDownloadUrl;
+  }
+
+  void pickImage() async {
+    final pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      Get.snackbar("Profile Picture",
+          "You have Successfully select your profile picture ");
+    }
+
+    pickedImages = Rx<File?>(File(pickedImage!.path));
   }
 }
