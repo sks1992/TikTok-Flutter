@@ -12,10 +12,15 @@ class AddVideoScreen extends StatelessWidget {
   pickVideo(ImageSource src, BuildContext context) async {
     final video = await ImagePicker().pickVideo(source: src);
     if (video != null) {
-      Get.off(
-        () => ConformScreen(
-          videoFile: File(video.path),
-          videoPath: video.path,
+      Get.snackbar("Video Selected", video.path);
+
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => ConformScreen(
+            videoFile: File(video.path),
+            videoPath: video.path,
+          ),
         ),
       );
     }
@@ -51,7 +56,7 @@ class AddVideoScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(7.0),
                   child: Text(
-                    'Camers',
+                    'Camera',
                     style: TextStyle(
                       fontSize: 20,
                     ),
@@ -61,9 +66,7 @@ class AddVideoScreen extends StatelessWidget {
             ),
           ),
           SimpleDialogOption(
-            onPressed: () {
-              Get.back();
-            },
+            onPressed: () => Navigator.of(context).pop(),
             child: Row(
               children: const [
                 Icon(Icons.close),
@@ -86,11 +89,10 @@ class AddVideoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var context = Get.context;
     return Scaffold(
       body: Center(
         child: InkWell(
-          onTap: () => showOptionsDialog(context!),
+          onTap: () => showOptionsDialog(context),
           child: Container(
             height: Get.height * 0.06,
             width: Get.width * 0.4,

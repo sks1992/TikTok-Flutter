@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiktok_clone/controller/upload_video_controller.dart';
 import 'package:tiktok_clone/views/widgets/custom_text_input_field.dart';
 import 'package:video_player/video_player.dart';
 
@@ -19,8 +20,11 @@ class ConformScreen extends StatefulWidget {
 
 class _ConformScreenState extends State<ConformScreen> {
   late VideoPlayerController controller;
-  TextEditingController songController = TextEditingController();
-  TextEditingController captionController = TextEditingController();
+  final TextEditingController _songController = TextEditingController();
+  final TextEditingController _captionController = TextEditingController();
+
+  UploadVideoController uploadVideoController =
+      Get.put(UploadVideoController());
 
   @override
   void initState() {
@@ -34,6 +38,12 @@ class _ConformScreenState extends State<ConformScreen> {
     controller.play();
     controller.setVolume(1);
     controller.setLooping(true);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
   }
 
   @override
@@ -62,7 +72,7 @@ class _ConformScreenState extends State<ConformScreen> {
                     margin: const EdgeInsets.symmetric(vertical: 10),
                     width: Get.width - 20,
                     child: CustomTextInputField(
-                      controller: songController,
+                      controller: _songController,
                       labelText: "Song Name",
                       icon: Icons.music_note,
                       isObscure: false,
@@ -73,7 +83,7 @@ class _ConformScreenState extends State<ConformScreen> {
                     margin: const EdgeInsets.symmetric(vertical: 10),
                     width: Get.width - 20,
                     child: CustomTextInputField(
-                      controller: captionController,
+                      controller: _captionController,
                       labelText: "Caption",
                       icon: Icons.closed_caption,
                       isObscure: false,
@@ -81,11 +91,15 @@ class _ConformScreenState extends State<ConformScreen> {
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        "Share",
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      )),
+                    onPressed: () {
+                      uploadVideoController.uploadVideo(_songController.text,
+                          _captionController.text, widget.videoPath);
+                    },
+                    child: const Text(
+                      "Share",
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                  ),
                 ],
               ),
             )
