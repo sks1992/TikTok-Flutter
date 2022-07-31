@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tiktok_clone/constants.dart';
+import 'package:tiktok_clone/views/screens/auth/signup_screen.dart';
 
 import '../../widgets/custom_text_input_field.dart';
 
@@ -74,12 +76,15 @@ class LoginScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      authController.loginUser(
+                          _emailController.text, _passwordController.text);
+                    },
                     child: const Center(
                       child: Text(
                         "Login",
-                        style:
-                            TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -97,7 +102,9 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => SignupScreen());
+                      },
                       child: Text(
                         "Register",
                         style: TextStyle(fontSize: 20, color: buttonColor),
