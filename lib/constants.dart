@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/views/screens/add_video_screen.dart';
+import 'package:tiktok_clone/views/screens/video_screen.dart';
 
 import 'controller/auth_controller.dart';
 
@@ -21,7 +22,7 @@ var authController = AuthController.instance;
 
 //list of widgets for bottomNavigationBar
 const pages = [
-  Center(child: Text("Home")),
+  VideoScreen(),
   Center(child: Text("Search")),
   AddVideoScreen(),
   Center(child: Text("Message")),
