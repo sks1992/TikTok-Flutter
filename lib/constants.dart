@@ -21,10 +21,10 @@ var fireStore = FirebaseFirestore.instance;
 var authController = AuthController.instance;
 
 //list of widgets for bottomNavigationBar
-const pages = [
+List pages = [
   VideoScreen(),
-  Center(child: Text("Search")),
-  AddVideoScreen(),
-  Center(child: Text("Message")),
-  Center(child: Text("Profile")),
+  const Center(child: Text("Search")),
+  const AddVideoScreen(),
+  const Center(child: Text("Message")),
+  const Center(child: Text("Profile")),
 ];
