@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:tiktok_clone/constants.dart';
 import 'package:tiktok_clone/views/screens/auth/signup_screen.dart';
 
@@ -102,9 +101,9 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     InkWell(
-                      onTap: () {
-                        Get.to(() => SignupScreen());
-                      },
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => SignupScreen()),
+                      ),
                       child: Text(
                         "Register",
                         style: TextStyle(fontSize: 20, color: buttonColor),
